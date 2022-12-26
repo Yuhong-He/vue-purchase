@@ -11,6 +11,11 @@ import OrderList from '@/views/OrderManage/OrderList';
 import OrderCollect from '@/views/OrderManage/OrderCollect';
 import OrderApprove from '@/views/OrderManage/OrderApprove';
 
+const routerPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function (location) {
+  return routerPush.call(this, location).catch(err => {})
+};
+
 Vue.use(VueRouter);
 
 const routes = [
