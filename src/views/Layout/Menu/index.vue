@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="/" class="el-menu-vertical-demo" router background-color="#004852" text-color="#fff" active-text-color="yellow" :collapse="isCollapse">
+  <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router background-color="#004852" text-color="#fff" active-text-color="yellow" :collapse="isCollapse">
     <el-menu-item index="/">
       <i class="el-icon-s-home"></i>
       <span slot="title">System Home</span>
@@ -49,8 +49,11 @@ export default {
   width: 200px;
   min-height: 400px;
 }
-
 .el-menu {
   border: none;
+}
+.el-menu .is-active {
+  background-color: forestgreen !important;
+  color: white !important;
 }
 </style>

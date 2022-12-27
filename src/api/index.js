@@ -10,6 +10,13 @@ const api = {
   },
   getHomeOrder() {
     return axios.get(base.homeOrder);
+  },
+
+  getProductsList(params) {
+    return axios.get(base.productsList,{params});
+  },
+  getProductsSearch(params) {
+    return axios.get(base.productSearch,{params});
   }
 }
 
