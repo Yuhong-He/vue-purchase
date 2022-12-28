@@ -5,6 +5,7 @@ import Login from '@/views/Login';
 import Home from '@/views/Home';
 import ProductManage from '@/views/ProductManage';
 import ProductList from '@/views/ProductManage/ProductList';
+import AddProduct from '@/views/ProductManage/ProductList/addProduct.vue';
 import ProductCategory from '@/views/ProductManage/ProductCategory';
 import OrderManage from '@/views/OrderManage';
 import OrderList from '@/views/OrderManage/OrderList';
@@ -42,6 +43,14 @@ const routes = [
             path: 'category',
             name: 'ProductCategory',
             component: ProductCategory
+          },
+          {
+            path: 'add',
+            name: 'AddProduct',
+            component: AddProduct,
+            meta: {
+              activeMenu: '/products/list'
+            }
           }
         ]
       },

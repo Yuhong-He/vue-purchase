@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router background-color="#004852" text-color="#fff" active-text-color="yellow" :collapse="isCollapse">
+  <el-menu :default-active="activeMenu()" class="el-menu-vertical-demo" router background-color="#004852" text-color="#fff" active-text-color="yellow" :collapse="isCollapse">
     <el-menu-item index="/">
       <i class="el-icon-s-home"></i>
       <span slot="title">System Home</span>
@@ -40,7 +40,17 @@
 
 <script>
 export default {
-  props: ['isCollapse']
+  props: ['isCollapse'],
+  methods: {
+    activeMenu() {
+      let route = this.$route;
+      let {path, meta} = route;
+      if(meta.activeMenu) {
+        return meta.activeMenu;
+      }
+      return path;
+    }
+  }
 };
 </script>
 

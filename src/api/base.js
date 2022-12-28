@@ -4,8 +4,9 @@ const base = {
   homeFormat: '/api/home/format',
   homeOrder: '/api/home/orderinfo',
 
-  productsList: '/api/product/list',
-  productSearch: '/api/product/search'
+  productList: '/api/product/list',
+  productSearch: '/api/product/search',
+  productDelete: '/api/product/deleteItemById',
 }
 
 export default base;

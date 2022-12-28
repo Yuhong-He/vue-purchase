@@ -13,10 +13,13 @@ const api = {
   },
 
   getProductsList(params) {
-    return axios.get(base.productsList,{params});
+    return axios.get(base.productList,{params});
   },
   getProductsSearch(params) {
     return axios.get(base.productSearch,{params});
+  },
+  deleteProduct(params) {
+    return axios.get(base.productDelete,{params});
   }
 }
 

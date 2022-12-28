@@ -16,7 +16,7 @@
 
 
     <div class="add-products">
-      <el-button size="mini" type="warning" round>Add Products</el-button>
+      <el-button size="mini" type="warning" @click="addProduct" round>Add Products</el-button>
       <el-button size="mini" type="danger" round>Delete Many</el-button>
     </div>
 
@@ -122,7 +122,39 @@ export default {
       console.log(index, row);
     },
     handleDelete(index, row) {
-      console.log(index, row);
+      this.$confirm('Delete the data?', 'Warning', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(() => {
+        this.deleteProduct(row.id);
+      }).catch(() => {
+        this.$message({
+          showClose: true,
+          type: 'info',
+          message: 'Delete Cancelled'
+        });
+      });
+    },
+    async deleteProduct(id) {
+      let res = await this.$api.deleteProduct({id});
+      if(res.data.status === 200) {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: 'Delete Success'
+        });
+      await this.getProductsList(1);
+      } else {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: 'Delete Failed'
+        });
+      }
+    },
+    addProduct() {
+      this.$router.push('/products/add');
     }
   }
 };
