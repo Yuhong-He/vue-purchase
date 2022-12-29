@@ -20,6 +20,9 @@ const api = {
   },
   deleteProduct(params) {
     return axios.get(base.productDelete,{params});
+  },
+  productCategory(params) {
+    return axios.get(base.productCategory,{params});
   }
 }
 

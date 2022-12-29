@@ -7,6 +7,7 @@ const base = {
   productList: '/api/product/list',
   productSearch: '/api/product/search',
   productDelete: '/api/product/deleteItemById',
+  productCategory: '/api/product/itemCategory/selectItemCategoryByParentId'
 }
 
 export default base;
