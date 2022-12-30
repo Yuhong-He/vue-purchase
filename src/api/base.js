@@ -7,7 +7,12 @@ const base = {
   productList: '/api/product/list',
   productSearch: '/api/product/search',
   productDelete: '/api/product/deleteItemById',
-  productCategory: '/api/product/itemCategory/selectItemCategoryByParentId'
+  productCategory: '/api/product/itemCategory/selectItemCategoryByParentId',
+  productAdd: '/api/product/insert'
 }
+
+export const host = base.host;
+
+export const upload = '/api/upload';
 
 export default base;

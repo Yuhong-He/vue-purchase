@@ -23,6 +23,9 @@ const api = {
   },
   productCategory(params) {
     return axios.get(base.productCategory,{params});
+  },
+  productAdd(params) {
+    return axios.get(base.productAdd,{params});
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <el-tree :props="props" :load="loadNode" lazy>
+  <el-tree :props="props" :load="loadNode" lazy @node-click="clickTree">
   </el-tree>
 </template>
 
@@ -31,6 +31,9 @@ export default {
       } else {
         return [];
       }
+    },
+    clickTree(data) {
+      this.$emit('changeTree', data);
     }
   }
 };

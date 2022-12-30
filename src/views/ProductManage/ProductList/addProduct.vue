@@ -4,7 +4,9 @@
       <el-col :span="4">
         <div class="menu">
           <div class="type">Product Type List</div>
-          <div class="tree"><ProductTree></ProductTree></div>
+          <div class="tree">
+            <ProductTree @changeTree="changeTree"></ProductTree>
+          </div>
         </div>
       </el-col>
       <el-col :span="20">
@@ -15,7 +17,7 @@
           <div class="wrapper">
             <el-form :model="productForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
               <el-form-item label="Category" prop="category">
-                <span> {{ productForm.category }} </span>
+                <span class="category"> {{ productForm.category }} </span>
               </el-form-item>
               <el-form-item label="Name" prop="title">
                 <el-input v-model="productForm.title"></el-input>
@@ -54,10 +56,7 @@
                 </el-col>
               </el-form-item>
               <el-form-item label="Image" prop="image">
-                <el-button>Upload</el-button>
-              </el-form-item>
-              <el-form-item label="Description" prop="descs">
-                Markdown Editor
+                <ImageUpload @sendImage="sendImage"></ImageUpload>
               </el-form-item>
               <div class="form-button">
                 <el-form-item>
@@ -75,22 +74,23 @@
 
 <script>
 import ProductTree from './productTree.vue'
-
+import ImageUpload from './imageUpload.vue'
 
 export default {
   components: {
-    ProductTree
+    ProductTree,
+    ImageUpload
   },
   data() {
     return {
       productForm: {
+        cid: '',
         category: '',
         title: '',
         price: '',
         num: '',
         sellPoint: '',
         image: '',
-        descs: false,
         date1: '',
         date2: ''
       },
@@ -112,7 +112,26 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          let {cid, category, title, price, num, sellPoint, image} = this.productForm;
+          this.$api.productAdd({
+            cid, category, title, price, num, sellPoint, image
+          })
+          .then(res => {
+            if(res.data.status === 200) {
+              this.$router.push('/products/list');
+              this.$message({
+                showClose: true,
+                message: 'Add success!',
+                type: 'success'
+              });
+            } else {
+              this.$message({
+                showClose: true,
+                message: 'Oops... Add failed',
+                type: 'error'
+              });
+            }
+          });
         } else {
           console.log('error submit!!');
           return false;
@@ -121,6 +140,13 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    changeTree(data) {
+      this.productForm.category = data.name;
+      this.productForm.cid = data.cid;
+    },
+    sendImage(url) {
+      this.productForm.image = url;
     }
   }
 }
@@ -133,7 +159,7 @@ export default {
 }
 .menu {
   border: 1px solid black;
-  height: 630px;
+  min-height: 650px;
   .type {
     height: 50px;
     line-height: 50px;
@@ -143,7 +169,7 @@ export default {
   }
 }
 .content {
-  height: 633px;
+  min-height: 653px;
   background-color: #f5f7d7;
   .title {
     background-color: gray;
@@ -158,6 +184,10 @@ export default {
     .form-button {
       text-align: right;
     }
+  }
+  .category {
+    color: green;
+    font-size: 1.5em;
   }
 }
 </style>
