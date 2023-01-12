@@ -54,6 +54,7 @@
 <script>
 import pagination from "@/components/pagination"
 import dayjs from "dayjs"
+import { mapMutations } from "vuex"
 export default {
   components: {
     pagination
@@ -76,6 +77,7 @@ export default {
   },
   methods: {
     dayjs,
+	...mapMutations('products', ['changeTitle', 'changeProducts']),
     async getProductsList(page) {
       let res = await this.$api.getProductsList({page});
       if(res.data.status === 200) {
@@ -120,6 +122,9 @@ export default {
     },
     handleEdit(index, row) {
       console.log(index, row);
+	  this.changeTitle('Edit');
+	  this.changeProducts(row);
+	  this.$router.push('/products/add');
     },
     handleDelete(index, row) {
       this.$confirm('Delete the data?', 'Warning', {
@@ -154,6 +159,7 @@ export default {
       }
     },
     addProduct() {
+	  this.changeTitle('Add');
       this.$router.push('/products/add');
     }
   }

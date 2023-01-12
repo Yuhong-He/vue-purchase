@@ -12,7 +12,7 @@
       <el-col :span="20">
         <div class="content">
           <div class="title">
-            Add Product
+            {{ title }} Product
           </div>
           <div class="wrapper">
             <el-form :model="productForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -56,7 +56,7 @@
                 </el-col>
               </el-form-item>
               <el-form-item label="Image" prop="image">
-                <ImageUpload @sendImage="sendImage"></ImageUpload>
+                <ImageUpload @sendImage="sendImage" :fileList="fileList"></ImageUpload>
               </el-form-item>
               <div class="form-button">
                 <el-form-item>
@@ -75,14 +75,33 @@
 <script>
 import ProductTree from './productTree.vue'
 import ImageUpload from './imageUpload.vue'
+import { mapState } from "vuex"
 
 export default {
   components: {
     ProductTree,
     ImageUpload
   },
+  computed: {
+	...mapState('products', ['title', 'productData'])
+  },
+  mounted() {
+	if(this.title === 'Edit') {
+		this.productForm = this.productData;
+		let img = this.productData.image;
+		console.log('Parse image ------ ' ,img);
+		let arr = [];
+		if(img) {
+			let obj = {};
+			obj.url = img;
+			arr.push(obj);
+		}
+		this.fileList = arr;
+	}
+  },
   data() {
     return {
+	  fileList: [],
       productForm: {
         cid: '',
         category: '',

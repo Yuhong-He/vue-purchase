@@ -7,6 +7,7 @@
       :on-preview="handlePictureCardPreview"
       :on-remove="handleRemove"
       :on-success="handleSuccess"
+	  :file-list="fileList"
       :limit="1"
       :on-exceed="handleExceed"
     >
@@ -20,6 +21,14 @@
 import {upload, host} from '@/api/base'
 
 export default {
+	props: {
+		fileList: {
+			type:Array,
+			default:function() {
+				return []
+			}
+		}
+	},
   data() {
     return {
       dialogImageUrl: '',
