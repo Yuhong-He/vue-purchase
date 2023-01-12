@@ -13,19 +13,22 @@ const api = {
   },
 
   getProductsList(params) {
-    return axios.get(base.productList,{params});
+    return axios.get(base.productList, {params});
   },
   getProductsSearch(params) {
-    return axios.get(base.productSearch,{params});
+    return axios.get(base.productSearch, {params});
   },
   deleteProduct(params) {
-    return axios.get(base.productDelete,{params});
+    return axios.get(base.productDelete, {params});
   },
   productCategory(params) {
-    return axios.get(base.productCategory,{params});
+    return axios.get(base.productCategory, {params});
   },
   productAdd(params) {
-    return axios.get(base.productAdd,{params});
+    return axios.get(base.productAdd, {params});
+  },
+  productEdit(params) {
+	return axios.get(base.productEdit, {params});
   }
 }
 

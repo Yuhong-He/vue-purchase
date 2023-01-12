@@ -89,7 +89,6 @@ export default {
 	if(this.title === 'Edit') {
 		this.productForm = this.productData;
 		let img = this.productData.image;
-		console.log('Parse image ------ ' ,img);
 		let arr = [];
 		if(img) {
 			let obj = {};
@@ -131,32 +130,56 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let {cid, category, title, price, num, sellPoint, image} = this.productForm;
-          this.$api.productAdd({
-            cid, category, title, price, num, sellPoint, image
-          })
-          .then(res => {
-            if(res.data.status === 200) {
-              this.$router.push('/products/list');
-              this.$message({
-                showClose: true,
-                message: 'Add success!',
-                type: 'success'
-              });
-            } else {
-              this.$message({
-                showClose: true,
-                message: 'Oops... Add failed',
-                type: 'error'
-              });
-            }
-          });
+          let {id, cid, category, title, price, num, sellPoint, image} = this.productForm;
+		  if(this.title === "Add") {
+			  this.addProduct({
+			  	cid, category, title, price, num, sellPoint, image
+			  });
+		  } else {
+			  this.editProduct({
+				  id, cid, category, title, price, num, sellPoint, image
+			  });
+		  }
         } else {
           console.log('error submit!!');
           return false;
         }
       });
     },
+	async addProduct(params) {
+		let res = await this.$api.productAdd(params);
+		if(res.data.status === 200) {
+		  this.$router.push('/products/list');
+		  this.$message({
+			showClose: true,
+			message: 'Add success!',
+			type: 'success'
+		  });
+		} else {
+		  this.$message({
+			showClose: true,
+			message: 'Oops... Add failed',
+			type: 'error'
+		  });
+		}
+	},
+	async editProduct(params) {
+		let res = await this.$api.productEdit(params);
+		if(res.data.status === 200) {
+		  this.$router.push('/products/list');
+		  this.$message({
+			showClose: true,
+			message: 'Edit success!',
+			type: 'success'
+		  });
+		} else {
+		  this.$message({
+			showClose: true,
+			message: 'Oops... Edit failed',
+			type: 'error'
+		  });
+		}
+	},
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
