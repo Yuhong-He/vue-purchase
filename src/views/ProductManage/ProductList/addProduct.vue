@@ -62,6 +62,7 @@
                 <el-form-item>
                   <el-button type="primary" @click="submitForm('ruleForm')">Save</el-button>
                   <el-button @click="resetForm('ruleForm')">Reset</el-button>
+                  <el-button @click="returnList()">Return</el-button>
                 </el-form-item>
               </div>
             </el-form>
@@ -87,8 +88,8 @@ export default {
   },
   mounted() {
 	if(this.title === 'Edit') {
-		this.productForm = this.productData;
-		let img = this.productData.image;
+		this.productForm = {...this.productData};
+		let img = this.productForm.image;
 		let arr = [];
 		if(img) {
 			let obj = {};
@@ -181,7 +182,20 @@ export default {
 		}
 	},
     resetForm(formName) {
-      this.$refs[formName].resetFields();
+		if(this.title === "Add") {
+			this.$refs[formName].resetFields();
+			this.fileList = [];
+		} else {
+			this.productForm = {...this.productData};
+			let img = this.productForm.image;
+			let arr = [];
+			if(img) {
+				let obj = {};
+				obj.url = img;
+				arr.push(obj);
+			}
+			this.fileList = arr;
+		}
     },
     changeTree(data) {
       this.productForm.category = data.name;
@@ -189,7 +203,10 @@ export default {
     },
     sendImage(url) {
       this.productForm.image = url;
-    }
+    },
+	returnList() {
+		this.$router.push('/products/list');
+	}
   }
 }
 </script>
