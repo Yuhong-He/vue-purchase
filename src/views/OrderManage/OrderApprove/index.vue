@@ -1,5 +1,6 @@
 <template>
   <div>
+    <breadcrumb></breadcrumb>
     <h2>Order Approve</h2>
   </div>
 </template>

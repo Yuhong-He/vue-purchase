@@ -1,5 +1,7 @@
 <template>
   <div class="list">
+    <breadcrumb></breadcrumb>
+
     <div class="header-search">
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="Product">
@@ -53,12 +55,14 @@
 </template>
 
 <script>
-import pagination from "@/components/pagination"
+import pagination from "@/components/Pagination"
+// import breadcrumb from "@/components/Breadcrumb" // Global registered
 import dayjs from "dayjs"
 import { mapMutations } from "vuex"
 export default {
   components: {
-    pagination
+    pagination,
+    // breadcrumb
   },
   data() {
     return {
@@ -91,7 +95,7 @@ export default {
         this.getPagination(this.currentPage - 1);
       }
     },
-    getPagination(page) { // weird pagination
+    getPagination(page) { // weird Pagination
       this.currentPage = page;
       if(this.searchStatus) {
         this.tableData = this.listTotal.slice((page - 1) * 8, page * 8);
@@ -218,6 +222,7 @@ export default {
     background-color: whitesmoke;
     border-radius: 10px  10px 0 0 ;
     padding: 10px;
+    margin-top: 10px;
     .el-form-item {
       margin-bottom: 0;
     }

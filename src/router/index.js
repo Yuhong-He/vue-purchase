@@ -23,32 +23,49 @@ const routes = [
   {
     path: '/',
     component: Layout,
+    meta: {
+      title: 'Home'
+    },
     children: [
       {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+          title: 'Home'
+        }
       },
       {
         path: '/products',
         name: 'Product',
         component: ProductManage,
+        meta: {
+          title: 'Product Manage'
+        },
+        redirect: '/products/list',
         children: [
           {
             path: 'list',
             name: 'ProductList',
-            component: ProductList
+            component: ProductList,
+            meta: {
+              title: 'Product List'
+            }
           },
           {
             path: 'category',
             name: 'ProductCategory',
-            component: ProductCategory
+            component: ProductCategory,
+            meta: {
+              title: 'Product Category'
+            }
           },
           {
             path: 'add',
             name: 'AddProduct',
             component: AddProduct,
             meta: {
+              title: 'Add Product',
               activeMenu: '/products/list'
             }
           }
@@ -58,21 +75,34 @@ const routes = [
         path: '/orders',
         name: 'Order',
         component: OrderManage,
+        meta: {
+          title: 'Order Manage'
+        },
+        redirect: '/orders/list',
         children: [
           {
             path: 'list',
             name: 'OrderList',
-            component: OrderList
+            component: OrderList,
+            meta: {
+              title: 'Order List'
+            }
           },
           {
             path: 'collect',
             name: 'OrderCollect',
-            component: OrderCollect
+            component: OrderCollect,
+            meta: {
+              title: 'Order Collect'
+            }
           },
           {
             path: 'approve',
             name: 'OrderApprove',
-            component: OrderApprove
+            component: OrderApprove,
+            meta: {
+              title: 'Order Approve'
+            }
           }
         ]
       }

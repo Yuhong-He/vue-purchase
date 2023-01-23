@@ -19,6 +19,9 @@ Vue.config.productionTip = false;
 
 Vue.prototype.$api = api;
 
+import breadcrumb from "@/components/Breadcrumb"
+Vue.component('breadcrumb', breadcrumb)
+
 new Vue({
   router,
   store,

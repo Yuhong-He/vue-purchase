@@ -1,5 +1,6 @@
 <template>
   <div>
+    <breadcrumb></breadcrumb>
     <h2>Product Category</h2>
   </div>
 </template>

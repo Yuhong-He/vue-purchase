@@ -1,75 +1,80 @@
 <template>
   <div class="addProduct">
-    <el-row :gutter="20">
-      <el-col :span="4">
-        <div class="menu">
-          <div class="type">Product Type List</div>
-          <div class="tree">
-            <ProductTree @changeTree="changeTree"></ProductTree>
+    <breadcrumb></breadcrumb>
+
+    <div class="add_body">
+      <el-row :gutter="20">
+        <el-col :span="4">
+          <div class="menu">
+            <div class="type">Product Type List</div>
+            <div class="tree">
+              <ProductTree @changeTree="changeTree"></ProductTree>
+            </div>
           </div>
-        </div>
-      </el-col>
-      <el-col :span="20">
-        <div class="content">
-          <div class="title">
-            {{ title }} Product
-          </div>
-          <div class="wrapper">
-            <el-form :model="productForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="Category" prop="category">
-                <span class="category"> {{ productForm.category }} </span>
-              </el-form-item>
-              <el-form-item label="Name" prop="title">
-                <el-input v-model="productForm.title"></el-input>
-              </el-form-item>
-              <el-row>
-                <el-col :span="6">
-                  <el-form-item label="Price" prop="price">
-                    <el-input v-model="productForm.price"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="6">
-                  <el-form-item label="Quantity" prop="num">
-                    <el-input v-model="productForm.num"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="6">
-                  <el-form-item label="Size" prop="size">
-                    <el-input v-model="productForm.size"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-form-item label="Character" prop="sellPoint">
-                <el-input v-model="productForm.sellPoint"></el-input>
-              </el-form-item>
-              <el-form-item label="Release">
-                <el-col :span="11">
-                  <el-form-item prop="date1">
-                    <el-date-picker type="date" placeholder="Select" v-model="productForm.date1" style="width: 100%;"></el-date-picker>
-                  </el-form-item>
-                </el-col>
-                <el-col class="line" :span="1">:</el-col>
-                <el-col :span="11">
-                  <el-form-item prop="date2">
-                    <el-time-picker placeholder="Select" v-model="productForm.date2" style="width: 100%;"></el-time-picker>
-                  </el-form-item>
-                </el-col>
-              </el-form-item>
-              <el-form-item label="Image" prop="image">
-                <ImageUpload @sendImage="sendImage" :fileList="fileList"></ImageUpload>
-              </el-form-item>
-              <div class="form-button">
-                <el-form-item>
-                  <el-button type="primary" @click="submitForm('ruleForm')">Save</el-button>
-                  <el-button @click="resetForm('ruleForm')">Reset</el-button>
-                  <el-button @click="returnList()">Return</el-button>
+        </el-col>
+        <el-col :span="20">
+          <div class="content">
+            <div class="title">
+              {{ title }} Product
+            </div>
+            <div class="wrapper">
+              <el-form :model="productForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <el-form-item label="Category" prop="category">
+                  <span class="category"> {{ productForm.category }} </span>
                 </el-form-item>
-              </div>
-            </el-form>
+                <el-form-item label="Name" prop="title">
+                  <el-input v-model="productForm.title"></el-input>
+                </el-form-item>
+                <el-row>
+                  <el-col :span="6">
+                    <el-form-item label="Price" prop="price">
+                      <el-input v-model="productForm.price"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="6">
+                    <el-form-item label="Quantity" prop="num">
+                      <el-input v-model="productForm.num"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="6">
+                    <el-form-item label="Size" prop="size">
+                      <el-input v-model="productForm.size"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-form-item label="Character" prop="sellPoint">
+                  <el-input v-model="productForm.sellPoint"></el-input>
+                </el-form-item>
+                <el-form-item label="Release">
+                  <el-col :span="11">
+                    <el-form-item prop="date1">
+                      <el-date-picker type="date" placeholder="Select" v-model="productForm.date1" style="width: 100%;"></el-date-picker>
+                    </el-form-item>
+                  </el-col>
+                  <el-col class="line" :span="1">:</el-col>
+                  <el-col :span="11">
+                    <el-form-item prop="date2">
+                      <el-time-picker placeholder="Select" v-model="productForm.date2" style="width: 100%;"></el-time-picker>
+                    </el-form-item>
+                  </el-col>
+                </el-form-item>
+                <el-form-item label="Image" prop="image">
+                  <ImageUpload @sendImage="sendImage" :fileList="fileList"></ImageUpload>
+                </el-form-item>
+                <div class="form-button">
+                  <el-form-item>
+                    <el-button type="primary" @click="submitForm('ruleForm')">Save</el-button>
+                    <el-button @click="resetForm('ruleForm')">Reset</el-button>
+                    <el-button @click="returnList()">Return</el-button>
+                  </el-form-item>
+                </div>
+              </el-form>
+            </div>
           </div>
-        </div>
-      </el-col>
-    </el-row>
+        </el-col>
+      </el-row>
+    </div>
+
   </div>
 </template>
 
@@ -215,6 +220,9 @@ export default {
 .addProduct {
   margin: 10px;
   font-size: 1.2em;
+}
+.add_body {
+  margin-top: 10px;
 }
 .menu {
   border: 1px solid black;

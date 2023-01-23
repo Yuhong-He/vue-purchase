@@ -1,5 +1,6 @@
 <template>
   <div>
+    <breadcrumb></breadcrumb>
     <h2>Order Collect</h2>
   </div>
 </template>
