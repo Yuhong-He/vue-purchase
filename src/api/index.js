@@ -29,6 +29,9 @@ const api = {
   },
   productEdit(params) {
 	return axios.get(base.productEdit, {params});
+  },
+  productBatchDelete(params) {
+    return axios.get(base.productBatchDelete, {params});
   }
 }
 

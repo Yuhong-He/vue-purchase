@@ -17,12 +17,13 @@
 
     <div class="add-products">
       <el-button size="mini" type="warning" @click="addProduct" round>Add Products</el-button>
-      <el-button size="mini" type="danger" round>Delete Many</el-button>
+      <el-button size="mini" type="danger" @click="batchDelete" round>Delete Many</el-button>
     </div>
 
 
     <div class="list-table">
-      <el-table :data="tableData" border style="width: 100%" empty-text="No Data">
+      <el-table :data="tableData" border style="width: 100%" empty-text="No Data"
+      @selection-change="changeSelection">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="id" label="ID" width="65"></el-table-column>
         <el-table-column prop="title" label="Name" width="120"></el-table-column>
@@ -68,8 +69,10 @@ export default {
       tableData: [],
       total: 100,
       pageSize: 1,
+      currentPage: 1,
       listTotal: [],
-      searchStatus: false
+      searchStatus: false,
+      batchDeleteIds: []
     }
   },
   created() {
@@ -84,9 +87,12 @@ export default {
         this.tableData = res.data.data;
         this.total = res.data.total;
         this.pageSize = res.data.pageSize;
+      } else if (res.data.status === 500 && this.currentPage > 1) {
+        this.getPagination(this.currentPage - 1);
       }
     },
     getPagination(page) { // weird pagination
+      this.currentPage = page;
       if(this.searchStatus) {
         this.tableData = this.listTotal.slice((page - 1) * 8, page * 8);
         return ;
@@ -149,7 +155,7 @@ export default {
           type: 'success',
           message: 'Delete Success'
         });
-      await this.getProductsList(1);
+      await this.getProductsList(this.currentPage);
       } else {
         this.$message({
           showClose: true,
@@ -161,6 +167,45 @@ export default {
     addProduct() {
 	  this.changeTitle('Add');
       this.$router.push('/products/add');
+    },
+    batchDelete() {
+      this.$confirm('Are your sure you want delete: ' + this.batchDeleteIds + '?', 'Warning', {
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(() => {
+        let ids = this.batchDeleteIds.join(',');
+        this.doBatchDelete(ids);
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Delete Cancelled'
+        });
+      });
+    },
+    changeSelection(selection) {
+      let arr = [];
+      selection.forEach(ele => {
+        arr.push(ele.id);
+      });
+      this.batchDeleteIds = arr;
+    },
+    async doBatchDelete(ids) {
+      let res = await this.$api.productBatchDelete({ids});
+      if(res.data.status === 200) {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: 'Delete Success'
+        });
+        await this.getProductsList(this.currentPage);
+      } else {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: 'Delete Failed'
+        });
+      }
     }
   }
 };
