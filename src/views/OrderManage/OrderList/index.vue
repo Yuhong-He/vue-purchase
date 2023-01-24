@@ -5,14 +5,18 @@
     <div class="header"></div>
 
     <div class="header-btn">
-      <el-button type="warning" size="mini" round>Order Collect</el-button>
+      <el-button type="warning" size="mini" @click="goToOrderCollect" round>Order Collect</el-button>
       <el-button type="warning" size="mini" round>Export</el-button>
     </div>
 
     <div class="list-content">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="code" label="Order ID"></el-table-column>
+        <el-table-column prop="code" label="Order ID">
+          <template v-slot="scope">
+            <span style="color: blue; cursor: pointer" @click="orderDesc(scope.row)">{{ scope.row.code }}</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="ordername" label="Customer"></el-table-column>
         <el-table-column prop="company" label="Company"></el-table-column>
         <el-table-column prop="phone" label="Tel"></el-table-column>
@@ -32,22 +36,30 @@
     </div>
 
     <pagination :total="total" :pageSize="pageSize" @getPagination="getPagination"></pagination>
+
+    <el-drawer :visible.sync="drawer" :direction="direction" :modal="false">
+      <orderDesc></orderDesc>
+    </el-drawer>
   </div>
 </template>
 
 <script>
 import pagination from "@/components/Pagination"
 import dayjs from "dayjs"
+import orderDesc from "./orderDesc.vue"
 export default {
   components: {
-    pagination
+    pagination,
+    orderDesc
   },
   data() {
     return {
       tableData: [],
       total: 100,
       pageSize: 1,
-      currentPage: 1
+      currentPage: 1,
+      drawer: false,
+      direction: 'rtl'
     }
   },
   created() {
@@ -71,6 +83,12 @@ export default {
     getPagination(page) {
       this.currentPage = page;
       this.getOrderList(page);
+    },
+    orderDesc(row) {
+      this.drawer = true;
+    },
+    goToOrderCollect() {
+      this.$router.push('/orders/collect');
     }
   }
 };

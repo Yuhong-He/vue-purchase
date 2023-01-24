@@ -6,6 +6,7 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  Drawer,
   Menu,
   Submenu,
   MenuItem,
@@ -152,6 +153,7 @@ Vue.use(Calendar);
 Vue.use(Backtop);
 Vue.use(PageHeader);
 Vue.use(CascaderPanel);
+Vue.use(Drawer);
 
 Vue.use(Loading.directive);
 
