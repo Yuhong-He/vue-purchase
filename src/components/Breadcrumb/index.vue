@@ -11,7 +11,6 @@ export default {
   },
   computed: {
     navData() {
-      console.log(this.$route.matched);
       let match = this.$route.matched;
       match[0].path = "/";
       return match;

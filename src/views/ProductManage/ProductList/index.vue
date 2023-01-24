@@ -55,8 +55,8 @@
 </template>
 
 <script>
-import pagination from "@/components/Pagination"
 // import breadcrumb from "@/components/Breadcrumb" // Global registered
+import pagination from "@/components/Pagination"
 import dayjs from "dayjs"
 import { mapMutations } from "vuex"
 export default {

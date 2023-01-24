@@ -10,7 +10,9 @@ const base = {
   productCategory: '/api/product/itemCategory/selectItemCategoryByParentId',
   productAdd: '/api/product/insert',
   productEdit: '/api/product/edit',
-  productBatchDelete: '/api/product/batchDelete'
+  productBatchDelete: '/api/product/batchDelete',
+
+  orderList: '/api/order/list'
 }
 
 export const host = base.host;

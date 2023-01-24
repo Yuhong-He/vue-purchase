@@ -32,6 +32,10 @@ const api = {
   },
   productBatchDelete(params) {
     return axios.get(base.productBatchDelete, {params});
+  },
+
+  getOrderList(params) {
+    return axios.get(base.orderList, {params});
   }
 }
 
