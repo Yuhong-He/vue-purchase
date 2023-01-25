@@ -6,7 +6,14 @@
 
     <div class="header-btn">
       <el-button type="warning" size="mini" @click="goToOrderCollect" round>Order Collect</el-button>
-      <el-button type="warning" size="mini" round>Export</el-button>
+      <downloadCSV
+        style="display: inline-block; margin-left: 10px;"
+        :data="tableData"
+        :fields="json_fields"
+        name="data.csv"
+      >
+        <el-button type="warning" size="mini" @click="downloadExcel" round>Export</el-button>
+      </downloadCSV>
     </div>
 
     <div class="list-content">
@@ -59,7 +66,8 @@ export default {
       pageSize: 1,
       currentPage: 1,
       drawer: false,
-      direction: 'rtl'
+      direction: 'rtl',
+      json_fields: []
     }
   },
   created() {
@@ -89,6 +97,9 @@ export default {
     },
     goToOrderCollect() {
       this.$router.push('/orders/collect');
+    },
+    downloadExcel() {
+      this.json_fields = ['code', 'ordername', 'company', 'phone', 'yudingTime', 'price'];
     }
   }
 };

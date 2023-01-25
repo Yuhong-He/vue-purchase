@@ -3,11 +3,12 @@
     <!-- 1. Top boxes -->
     <div class="header">
       <div class="item">
-        Total Sales
+        {{ $t('home.totalSales') }}
         <div class='num'>{{ objCount.saleTotal | num }}</div>
         <div class="bottom">Today: {{ objCount.sale | num }}</div>
       </div>
-      <div class="item">Total Views
+      <div class="item">
+        {{ $t('home.totalViews') }}
         <div class='num'>{{ objCount.viewsTotal | num }}</div>
         <div class="bottom">Today: {{ objCount.views | num }}</div>
       </div>

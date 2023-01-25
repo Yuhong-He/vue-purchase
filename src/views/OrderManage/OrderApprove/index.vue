@@ -1,16 +1,37 @@
 <template>
-  <div>
+  <div class="approve">
     <breadcrumb></breadcrumb>
-    <h2>Order Approve</h2>
+    <div class="main">
+      <el-input placeholder="Input PDF URL" v-model="pdf" class="inputBox" />
+    </div>
+    <PDFViewer :pdfSource="pdf"></PDFViewer>
   </div>
 </template>
 
 <script>
+import PDFViewer from '@/components/PDFviewer/index.vue';
 export default {
-  name: 'index'
+  components: {
+    PDFViewer
+  },
+  data() {
+    return {
+      pdf: ""
+    }
+  },
+  methods: {
+
+  }
 };
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+.approve {
+  margin: 10px;
+  .main {
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+  }
+}
 </style>

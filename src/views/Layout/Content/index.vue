@@ -8,6 +8,18 @@
       <div class="info">
         <span>{{ nowTime }}</span>
         <span class="vertical-bar">|</span>
+        <el-dropdown
+          :show-timeout='showTimeout'
+          @command="handleCommand">
+          <span class="el-dropdown-link">
+            <font-awesome-icon icon="fa-solid fa-language" /><i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="myEn">English</el-dropdown-item>
+            <el-dropdown-item command="myZh">中文</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <span class="vertical-bar">|</span>
         <span>Welcome: XXX</span>
         <span class="vertical-bar">|</span>
         <span class="logout">
@@ -23,11 +35,17 @@
 import dayjs from 'dayjs';
 
 export default {
-  props: ['isCollapse'],
+  props: {
+    'isCollapse': Boolean
+  },
   data() {
     return {
-      nowTime: ''
+      nowTime: '',
+      showTimeout: 50
     }
+  },
+  mounted() {
+    this.showTimes();
   },
   methods: {
     changeMenu() {
@@ -36,11 +54,11 @@ export default {
     showTimes() {
       this.nowTime = new dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
       setInterval(this.showTimes, 1000);
+    },
+    handleCommand(val) {
+      this.$i18n.locale = val;
     }
   },
-  created() {
-    this.showTimes();
-  }
 };
 </script>
 
@@ -62,6 +80,13 @@ export default {
     text-align: right;
     padding-right: 20px;
     font-size: 1.2em;
+    .el-dropdown-link {
+      cursor: pointer;
+      color: #fff;
+    }
+    .el-icon-arrow-down {
+      font-size: 12px;
+    }
   }
   .vertical-bar {
     padding: 10px;
