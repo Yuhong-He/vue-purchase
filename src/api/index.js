@@ -36,7 +36,14 @@ const api = {
 
   getOrderList(params) {
     return axios.get(base.orderList, {params});
-  }
+  },
+
+  login(params) {
+    return axios.get(base.login, {params});
+  },
+  permission(params) {
+    return axios.get(base.permission, {params});
+  },
 }
 
 export default api;

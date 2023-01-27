@@ -12,7 +12,10 @@ const base = {
   productEdit: '/api/product/edit',
   productBatchDelete: '/api/product/batchDelete',
 
-  orderList: '/api/order/list'
+  orderList: '/api/order/list',
+
+  login: '/api/login',
+  permission: '/api/permission'
 }
 
 export const host = base.host;

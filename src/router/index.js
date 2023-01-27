@@ -11,6 +11,9 @@ import OrderManage from '@/views/OrderManage';
 import OrderList from '@/views/OrderManage/OrderList';
 import OrderCollect from '@/views/OrderManage/OrderCollect';
 import OrderApprove from '@/views/OrderManage/OrderApprove';
+import SystemManage from '@/views/SystemManage';
+import RoleManage from '@/views/SystemManage/role';
+import DepartmentManage from '@/views/SystemManage/department';
 
 const routerPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function (location) {
@@ -102,6 +105,33 @@ const routes = [
             component: OrderApprove,
             meta: {
               title: 'Order Approve'
+            }
+          }
+        ]
+      },
+      {
+        path: '/system',
+        name: 'System',
+        component: SystemManage,
+        meta: {
+          title: 'System Manage'
+        },
+        redirect: '/system/role',
+        children: [
+          {
+            path: 'role',
+            name: 'RoleManage',
+            component: RoleManage,
+            meta: {
+              title: 'Role Manage'
+            }
+          },
+          {
+            path: 'department',
+            name: 'DepartmentManage',
+            component: DepartmentManage,
+            meta: {
+              title: 'Department Manage'
             }
           }
         ]

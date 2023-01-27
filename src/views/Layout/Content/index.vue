@@ -20,9 +20,9 @@
           </el-dropdown-menu>
         </el-dropdown>
         <span class="vertical-bar">|</span>
-        <span>Welcome: XXX</span>
+        <span>Welcome: {{ userInfo.username }}</span>
         <span class="vertical-bar">|</span>
-        <span class="logout">
+        <span class="logout" @click="logout">
           <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
         </span>
       </div>
@@ -33,6 +33,7 @@
 
 <script>
 import dayjs from 'dayjs';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   props: {
@@ -47,7 +48,11 @@ export default {
   mounted() {
     this.showTimes();
   },
+  computed: {
+    ...mapState('login', ['userInfo'])
+  },
   methods: {
+    ...mapMutations('login', ['deleteUser']),
     changeMenu() {
       this.$emit('changeMenu');
     },
@@ -57,6 +62,10 @@ export default {
     },
     handleCommand(val) {
       this.$i18n.locale = val;
+    },
+    logout() {
+      this.deleteUser();
+      this.$router.replace('/login');
     }
   },
 };
