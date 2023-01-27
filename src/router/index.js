@@ -1,30 +1,22 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Layout from '@/views/Layout';
-import Login from '@/views/Login';
-import Home from '@/views/Home';
-import ProductManage from '@/views/ProductManage';
-import ProductList from '@/views/ProductManage/ProductList';
-import AddProduct from '@/views/ProductManage/ProductList/addProduct.vue';
-import ProductCategory from '@/views/ProductManage/ProductCategory';
-import OrderManage from '@/views/OrderManage';
-import OrderList from '@/views/OrderManage/OrderList';
-import OrderCollect from '@/views/OrderManage/OrderCollect';
-import OrderApprove from '@/views/OrderManage/OrderApprove';
 
 const routerPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function (location) {
   return routerPush.call(this, location).catch(err => {})
 };
-
 Vue.use(VueRouter);
 
-const routes = [
+import Layout from '@/views/Layout';
+import Login from '@/views/Login';
+import Home from '@/views/Home';
+
+export const baseRoutes = [
   {
     path: '/',
     component: Layout,
     meta: {
-      title: 'Home'
+      isLogin: true
     },
     children: [
       {
@@ -34,80 +26,12 @@ const routes = [
         meta: {
           title: 'Home'
         }
-      },
-      {
-        path: '/products',
-        name: 'Product',
-        component: ProductManage,
-        meta: {
-          title: 'Product Manage'
-        },
-        redirect: '/products/list',
-        children: [
-          {
-            path: 'list',
-            name: 'ProductList',
-            component: ProductList,
-            meta: {
-              title: 'Product List'
-            }
-          },
-          {
-            path: 'category',
-            name: 'ProductCategory',
-            component: ProductCategory,
-            meta: {
-              title: 'Product Category'
-            }
-          },
-          {
-            path: 'add',
-            name: 'AddProduct',
-            component: AddProduct,
-            meta: {
-              title: 'Add Product',
-              activeMenu: '/products/list'
-            }
-          }
-        ]
-      },
-      {
-        path: '/orders',
-        name: 'Order',
-        component: OrderManage,
-        meta: {
-          title: 'Order Manage'
-        },
-        redirect: '/orders/list',
-        children: [
-          {
-            path: 'list',
-            name: 'OrderList',
-            component: OrderList,
-            meta: {
-              title: 'Order List'
-            }
-          },
-          {
-            path: 'collect',
-            name: 'OrderCollect',
-            component: OrderCollect,
-            meta: {
-              title: 'Order Collect'
-            }
-          },
-          {
-            path: 'approve',
-            name: 'OrderApprove',
-            component: OrderApprove,
-            meta: {
-              title: 'Order Approve'
-            }
-          }
-        ]
       }
     ]
   },
+]
+
+export const routes = [
   {
     path: '/login',
     name: 'Login',

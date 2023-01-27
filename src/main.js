@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
+import './router/router-permission';
 import store from './store';
 import './plugins/element.js';
 import './assets/css/reset.css';

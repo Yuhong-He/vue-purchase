@@ -25,22 +25,27 @@
         <el-menu-item index="/orders/approve">Order Approve</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
-    <el-submenu index="5" disabled>
+    <el-submenu index="/system">
       <template slot="title">
         <i class="el-icon-setting"></i>
         <span slot="title">System Manage</span>
       </template>
       <el-menu-item-group>
-        <el-menu-item index="5-1">Role Manage</el-menu-item>
-        <el-menu-item index="5-2">Department Manage</el-menu-item>
+        <el-menu-item index="/system/role">Role Manage</el-menu-item>
+        <el-menu-item index="/system/department">Department Manage</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: ['isCollapse'],
+  computed: {
+    ...mapState('menu', ['dyMenuList'])
+  },
   methods: {
     activeMenu() {
       let route = this.$route;

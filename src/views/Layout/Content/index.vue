@@ -20,7 +20,7 @@
           </el-dropdown-menu>
         </el-dropdown>
         <span class="vertical-bar">|</span>
-        <span>Welcome: XXX</span>
+        <span>Welcome: {{ userInfo.username }}</span>
         <span class="vertical-bar">|</span>
         <span class="logout">
           <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
@@ -33,6 +33,7 @@
 
 <script>
 import dayjs from 'dayjs';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   props: {
@@ -46,6 +47,9 @@ export default {
   },
   mounted() {
     this.showTimes();
+  },
+  computed: {
+    ...mapState('login', ['userInfo'])
   },
   methods: {
     changeMenu() {
