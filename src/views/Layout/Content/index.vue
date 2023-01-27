@@ -22,7 +22,7 @@
         <span class="vertical-bar">|</span>
         <span>Welcome: {{ userInfo.username }}</span>
         <span class="vertical-bar">|</span>
-        <span class="logout">
+        <span class="logout" @click="logout">
           <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
         </span>
       </div>
@@ -52,6 +52,8 @@ export default {
     ...mapState('login', ['userInfo'])
   },
   methods: {
+    ...mapMutations('menu', ['deleteMenuList']),
+    ...mapMutations('login', ['deleteUser']),
     changeMenu() {
       this.$emit('changeMenu');
     },
@@ -61,6 +63,11 @@ export default {
     },
     handleCommand(val) {
       this.$i18n.locale = val;
+    },
+    logout() {
+      this.deleteMenuList();
+      this.deleteUser();
+      this.$router.replace('/login');
     }
   },
 };

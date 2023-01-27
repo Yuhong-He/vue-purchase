@@ -1,7 +1,8 @@
 import api from '@/api/index'
 import {menuList} from '@/router/menuList';
 import { rulesMenu } from '@/utils/rulesMenu';
-import router, {baseRoutes} from '@/router';
+import {baseRoutes} from '@/router';
+import {cloneDeep} from 'lodash';
 
 export default {
   namespaced: true,
@@ -26,7 +27,7 @@ export default {
           token: context.rootState.login.userInfo.token
         }).then(res => {
           let menus = rulesMenu(menuList, res.data.data);
-          let routes = baseRoutes[0].children;
+          let routes = cloneDeep(baseRoutes[0].children);
           routes.push(...menus);
           context.commit('setMenuList', routes);
           // router.addRoutes(baseRoutes);
