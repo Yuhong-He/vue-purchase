@@ -25,7 +25,7 @@
         <el-menu-item index="/orders/approve">Order Approve</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
-    <el-submenu index="/system">
+    <el-submenu v-if="(username === 'admin')" index="/system">
       <template slot="title">
         <i class="el-icon-setting"></i>
         <span slot="title">System Manage</span>
@@ -40,9 +40,18 @@
 
 <script>
 import { mapState } from 'vuex';
+import store from '@/store';
 
 export default {
+  data() {
+    return {
+      username: ''
+    }
+  },
   props: ['isCollapse'],
+  created() {
+    this.username = store.state.login.userInfo.username;
+  },
   computed: {
     ...mapState('menu', ['dyMenuList'])
   },
