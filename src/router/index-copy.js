@@ -19,13 +19,10 @@ const routerPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function (location) {
   return routerPush.call(this, location).catch(err => {})
 };
+
 Vue.use(VueRouter);
 
-import Layout from '@/views/Layout';
-import Login from '@/views/Login';
-import Home from '@/views/Home';
-
-export const baseRoutes = [
+const routes = [
   {
     path: '/',
     component: Layout,
@@ -141,9 +138,6 @@ export const baseRoutes = [
       }
     ]
   },
-]
-
-export const routes = [
   {
     path: '/login',
     name: 'Login',
