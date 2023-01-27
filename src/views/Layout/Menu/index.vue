@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import store from '@/store';
 
 export default {
@@ -51,9 +50,6 @@ export default {
   props: ['isCollapse'],
   created() {
     this.username = store.state.login.userInfo.username;
-  },
-  computed: {
-    ...mapState('menu', ['dyMenuList'])
   },
   methods: {
     activeMenu() {

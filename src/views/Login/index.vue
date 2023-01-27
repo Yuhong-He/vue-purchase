@@ -1,30 +1,30 @@
 <template>
-  <div class="clearfix" id="login_wrap">
-    <div id="login">
-      <h2 class="title">Login Page</h2>
-      <div class="login-account">
-        <span>Account: </span>
-        <input
-          type="text"
-          placeholder="type in something"
-          name="account"
-          v-model.trim="username"
-        />
+    <div class="clearfix" id="login_wrap">
+      <div id="login">
+        <h2 class="title">Login Page</h2>
+        <div class="login-account">
+          <span>Account: </span>
+          <input
+            type="text"
+            placeholder="type in something"
+            name="account"
+            v-model.trim="username"
+          />
+        </div>
+        <div class="login-password">
+          <span>Password: </span>
+          <input
+            type="password"
+            placeholder="type in something"
+            name="password"
+            v-model.trim="password"
+          />
+        </div>
+        <p class="login-btn">
+          <el-button id="loginBtn" type="primary" @click="getLogin">Login</el-button>
+        </p>
+        <p>Account = "Admin" is super admin</p>
       </div>
-      <div class="login-password">
-        <span>Password: </span>
-        <input
-          type="password"
-          placeholder="type in something"
-          name="password"
-          v-model.trim="password"
-        />
-      </div>
-      <p class="login-btn">
-        <el-button id="loginBtn" type="primary" @click="getLogin">Login</el-button>
-      </p>
-      <p>Account = "Admin" is super admin</p>
-    </div>
   </div>
 </template>
 

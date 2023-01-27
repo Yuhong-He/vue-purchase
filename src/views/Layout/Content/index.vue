@@ -52,7 +52,6 @@ export default {
     ...mapState('login', ['userInfo'])
   },
   methods: {
-    ...mapMutations('menu', ['deleteMenuList']),
     ...mapMutations('login', ['deleteUser']),
     changeMenu() {
       this.$emit('changeMenu');
@@ -65,7 +64,6 @@ export default {
       this.$i18n.locale = val;
     },
     logout() {
-      this.deleteMenuList();
       this.deleteUser();
       this.$router.replace('/login');
     }
