@@ -1,5 +1,7 @@
 # vue-purchase
 
+router-permission太复杂了，有个逻辑小bug，决定不搞了。
+
 ## Project setup
 ```
 npm install
